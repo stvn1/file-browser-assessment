@@ -1,0 +1,13 @@
+.App {
+  text-align: left;
+  padding: 50px;
+}
+
+.folder {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.file {
+  text-decoration: underline;
+  cursor: pointer;
+}
