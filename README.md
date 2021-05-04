@@ -4,7 +4,7 @@ Dir structure
 
 Demo:https://file-browser-assessment.netlify.app/
 
-Backend is on heroku, so it may take a couple of min if dyno is sleeping.
+Backend is on heroku, so it may take a couple of min to load if dyno is sleeping.
    
 
 
