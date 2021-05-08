@@ -41,6 +41,8 @@ router.get('/home/:path?(*)', (req,res,next)=>{
       const stat = fs.statSync(filepath);
       const isFile = stat.isFile();
       const isDir = stat.isDirectory();
+      //app in this case because is heroku
+      //otherwise it would be the parent folder (server)
       getPath = filepath.split('app')[1].split('/').slice(0, -1).join('/').substring(1)
       if (isFile) files.push(name);
       if (isDir) folders.push(name)
