@@ -16,22 +16,30 @@ const Home = () => {
 
     //fix netlify proxy issues
     const baseURL ='https://file-browser-backend.herokuapp.com'
+    // const baseURL = 'http://localhost:3001'
   
     //load main folder onMount
   useEffect(() => {
-    fetch(`${baseURL}/home`)
+    fetch(`${baseURL}/home/`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
 
   const traversePath = (dir) =>{
-    fetch(`${baseURL}/${dir}`)
+
+    fetch(`${baseURL}/${data.path}/${dir}`)
+    .then((res) => res.json())
+    .then((data) => setData(data));
+
+  }
+  const breadCrumbTraverse = (path) =>{
+    console.log(`${baseURL}/home/${path}`)
+    fetch(`${baseURL}/${path}`)
     .then((res) => res.json())
     .then((data) => setData(data));
   }
 
   const getFile = (dir,file) =>{
-    //   console.log(`/file/${dir.replaceAll( '/','.')}/${file}`)
       fetch(`${baseURL}/file/${dir.replaceAll('/','.')}/${file}`)
       .then(response => response.blob())
       .then(blob => URL.createObjectURL(blob))
@@ -46,7 +54,7 @@ const Home = () => {
         <div>
             {data.dir.map( (dir) =>(
             <div className='folder' 
-                onClick={()=>traversePath(dir)} 
+                onClick={()=>traversePath(dir,data.path)} 
                 key={uniqid()}> <FolderIcon  style={{fontSize: '15px'}}/> {dir}</div>
             ))}
              {data.files.map( (file) =>(
@@ -60,7 +68,7 @@ const Home = () => {
     return (
         <div>
             {!data ? null : 
-                <Breadcrumb changePath={traversePath}  path={data.path}/>}
+                <Breadcrumb changePath={breadCrumbTraverse}  path={data.path}/>}
 
             {!data ? "Loading..." : mainPortion()}
         </div>

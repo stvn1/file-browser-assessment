@@ -29,13 +29,20 @@ li:hover{
 function Breadcrum({path, changePath}) {
 
     let crumbs = path.split('/')
-    // console.log(crumbs)
+
+    const handleClick= (crumb) =>{
+        let parts = path.split('/')
+        parts.splice(parts.indexOf(crumb) +1,)
+        changePath(parts.join('/'))
+    }
+
+
     return (
         <div>
             <Nav>
                 <ul>
                     {crumbs.map(crumb => (
-                        <li onClick={()=>changePath(crumb)} key={uniqid()}>
+                        <li onClick={()=>handleClick(crumb)} key={uniqid()}>
                             <StyledArrowIcon  /> {crumb}
                         </li>
                     ))}
