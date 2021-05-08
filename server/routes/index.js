@@ -9,7 +9,7 @@ router.get('/file/:filepath/:filename', (req,res,next) =>{
     console.log(req.params)
     // let filepath =req.params.filepath.replaceAll('.','/')
     let filepath = req.params.filepath.split('.').join('/')
-    let fileToGet = '../'+ filepath +'/'+ req.params.filename + '.txt';
+    let fileToGet = '../'+ filepath +'/'+ req.params.filename;
     console.log(fileToGet)
     res.sendFile(path.join(__dirname, fileToGet));
 
@@ -41,51 +41,16 @@ router.get('/home/:path?(*)', (req,res,next)=>{
       const stat = fs.statSync(filepath);
       const isFile = stat.isFile();
       const isDir = stat.isDirectory();
-      //app in this case because is heroku
-      //otherwise it would be the parent folder (server)
+      //localhost:
+      // getPath = filepath.split('server')[1].split('/').slice(0, -1).join('/').substring(1)
+      //heroku:
       getPath = filepath.split('app')[1].split('/').slice(0, -1).join('/').substring(1)
-      if (isFile) files.push(name);
+      if (isFile) files.push(name + ext);
       if (isDir) folders.push(name)
     });
     
     res.json({dir:folders, files:files, path:getPath})
 })
-
-
-
-
-
-
-
-
-// /* myName directory */
-// router.get('/myname', (req,res,next)=>{
-//     res.json({
-//         files:['filea.txt', 'fileb.txt'],
-//         dir:["projects"],
-//         path:'home/myname'
-    
-//     })
-// })
-
-// /* Projects directory */
-// router.get('/projects', (req,res,next)=>{
-//     res.json({
-//         dir:['mysupersecretproject'],
-//         files:[],
-//         path:'home/myname/projects'
-    
-//     })
-// })
-// /* mysupersecretproject directory */
-// router.get('/mysupersecretproject', (req,res,next)=>{
-//     res.json({
-//         files:['mysupersecretfile.txt'],
-//         dir:[],
-//         path:'home/myname/projects/mysupersecretproject'
-    
-//     })
-// })
 
 
 
