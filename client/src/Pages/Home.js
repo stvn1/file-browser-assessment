@@ -34,7 +34,7 @@ const Home = () => {
 
   }
   const breadCrumbTraverse = (path) =>{
-    console.log(`${baseURL}/home/${path}`)
+    // console.log(`${baseURL}/home/${path}`)
     fetch(`${baseURL}/${path}`)
     .then((res) => res.json())
     .then((data) => setData(data));

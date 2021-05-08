@@ -33,7 +33,7 @@ function Breadcrum({path, changePath}) {
     const handleClick= (index) =>{
         let parts = path.split('/')
         parts.splice(index +1)
-        console.log(parts.join('/'))
+        // console.log(parts.join('/'))
         changePath(parts.join('/'))
     }
 
