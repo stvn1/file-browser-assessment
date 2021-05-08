@@ -30,9 +30,10 @@ function Breadcrum({path, changePath}) {
 
     let crumbs = path.split('/')
 
-    const handleClick= (crumb) =>{
+    const handleClick= (index) =>{
         let parts = path.split('/')
-        parts.splice(parts.indexOf(crumb) +1,)
+        parts.splice(index +1)
+        console.log(parts.join('/'))
         changePath(parts.join('/'))
     }
 
@@ -41,8 +42,8 @@ function Breadcrum({path, changePath}) {
         <div>
             <Nav>
                 <ul>
-                    {crumbs.map(crumb => (
-                        <li onClick={()=>handleClick(crumb)} key={uniqid()}>
+                    {crumbs.map((crumb, index) => (
+                        <li onClick={()=>handleClick(index)} key={uniqid()}>
                             <StyledArrowIcon  /> {crumb}
                         </li>
                     ))}

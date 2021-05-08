@@ -17,6 +17,7 @@ router.get('/file/:filepath/:filename', (req,res,next) =>{
 
 
 
+
 /* Get All */
 router.get('/home/:path?(*)', (req,res,next)=>{
     let dir;
@@ -42,7 +43,7 @@ router.get('/home/:path?(*)', (req,res,next)=>{
       const isFile = stat.isFile();
       const isDir = stat.isDirectory();
       //localhost:
-      // getPath = filepath.split('server')[1].split('/').slice(0, -1).join('/').substring(1)
+    //   getPath = filepath.split('server')[1].split('/').slice(0, -1).join('/').substring(1)
       //heroku:
       getPath = filepath.split('app')[1].split('/').slice(0, -1).join('/').substring(1)
       if (isFile) files.push(name + ext);
